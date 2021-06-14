@@ -89,3 +89,33 @@ sub EVENT_CONNECT {
         }
     }
 }
+
+sub EVENT_TEST_BUFF {
+    my %test_items = (        
+        "Warrior" => [38000..38020],
+        "Cleric" => [38168..38188],
+        "Paladin" => [38084..38104],
+        "Ranger" => [38105..38125],
+        "Shadowknight" => [38063..38083],
+        "Druid" => [38189..38209],
+        "Monk" => [38021..38041],
+        "Bard" => [38147..38167],
+        "Rogue" => [38042..38062],
+        "Shaman" => [38210..38230],
+        "Necromancer" => [38294..38314],
+        "Wizard" => [38231..38251],
+        "Magician" => [38252..38272],
+        "Enchanter" => [38273..38293],
+        "Beastlord" => [38126..38146],
+        "Berserker" => [38315..38332],
+    );
+    if ($ulevel < 25) {
+        quest::level(25);
+        quest::scribespells(25, 1);
+        quest::traindiscs(25, 1);
+        my @item_ids = @{$test_items{$class}};
+        foreach my $item_id (@item_ids) {
+            quest::summonitem($item_id);
+        }
+    }
+}
